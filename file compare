@@ -1,0 +1,7 @@
+import filecmp
+
+# Simple comparison
+if filecmp.cmp('file1.txt', 'file2.txt'):
+  print("Files are identical.")
+else:
+  print("Files are different.")
