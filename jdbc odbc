@@ -1,0 +1,30 @@
+java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.SQLException;
+
+public class JDBCODBCExample {
+    public static void main(String[] args) {
+        String url = "jdbc:odbc:MyODBCDataSource"; // Replace with your ODBC DSN
+        //Note: Never hardcode database credentials in your production code.
+
+        try {
+            // Load the JDBC-ODBC Bridge driver (Sun's version)
+            Class.forName("sun.jdbc.odbc.JdbcOdbcDriver");
+
+            // Establish the connection using DriverManager
+            Connection connection = DriverManager.getConnection(url);
+
+            if (connection != null) {
+                System.out.println("Connected to the database!");
+                // ... Perform database operations ...
+                connection.close(); // Close the connection
+            } else {
+                System.out.println("Failed to connect to the database.");
+            }
+        } catch (ClassNotFoundException e) {
+            System.err.println("JDBC-ODBC Bridge driver not found: " + e.getMessage());
+        } catch (SQLException e) {
+            System.err.println("Database connection error: " + e.getMessage());
+        }
+    }
+}
